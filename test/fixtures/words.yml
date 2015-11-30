@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  word: MyString
+  meaning1: MyString
+  meaning2: MyString
+  meaning3: MyString
+  bookmarked: false
+
+two:
+  word: MyString
+  meaning1: MyString
+  meaning2: MyString
+  meaning3: MyString
+  bookmarked: false

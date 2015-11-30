@@ -1,0 +1,15 @@
+<div class="container well" style="width:500px">
+<h1>Dictionary</h1>
+<%=link_to "show bookmaked words",showbookmarkedwords_path,remote: true,class: "btn btn-xs btn-success pull-right"%><br>
+<%= form_tag(dictionary_search_path, remote: true) do -%>
+ <div class="form-group">
+  <%= label_tag 'word',"Word : " %><br>
+  <%= text_field_tag 'word',nil,placeholder: "enter word",class: "form-control",required: true%>
+ </div>
+ <span><%= submit_tag 'Find meaning',class: "btn btn-success btn-xs"%></span><span id="result1"></span>
+<% end -%>
+<hr/>
+<div id="result"></div>
+<hr/>
+<div id="bookmarked"></div>
+</div>

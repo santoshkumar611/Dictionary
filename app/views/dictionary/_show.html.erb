@@ -1,0 +1,14 @@
+<table class = "table table-hover">
+<thead>
+  <tr>
+    <th>word</th>
+    <th>meaning</th>
+   </tr>
+</thead>
+<tbody>
+<% @words.each do |word| %>
+ <tr><td><%=word.word%></td><td><%=word.meaning1%></td></tr>
+<%end%>
+</tbody>
+</table>
+<%=link_to "close",close_path,remote: true,class: "btn btn-success"%>

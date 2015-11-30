@@ -1,0 +1,25 @@
+<% if flash[:notice] %>
+    <div class="notice" style="color:red"><%= flash[:notice] %></div>
+<% else %>
+<%= label_tag '',"Word : " %><br><%= @hash1["word"] %>
+<div class="res">
+ <% if @bookmarked %>
+  <%=link_to "UnBookmark this word ",unbookmark_path(@hash1["word"]),remote: true,class: "fa fa-bookmark pull-right" %>
+ <% else %>
+  <%=link_to "Bookmark this word",bookmark_path(@hash1["word"]),remote: true,class: "fa fa-bookmark-o pull-right"%>
+ <% end %> 
+</div>
+<br/>
+<%= label_tag '',"meaning : " %><br><%= @hash1["meaning1"] %>
+<br/>
+
+<% if @hash1["meaning2"].present?%>
+<%= label_tag '',"meaning : " %><br><%= @hash1["meaning2"]%>
+<% end %>
+<br/>
+
+<% if @hash1["meaning3"].present?%>
+<%= label_tag '',"meaning : " %><br><%= @hash1["meaning3"]%>
+<% end %>
+<%= link_to "Download",download_path(@hash1["word"],{:format=>"pdf"}),class: "fa fa-download"%>
+<%end%>
