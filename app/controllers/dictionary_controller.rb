@@ -32,8 +32,8 @@ class DictionaryController < ApplicationController
        if response.body["definitions"][2].present?
         @hash1["meaning3"] = response.body["definitions"][2]["text"]
 	     end
-        Resque.enqueue(WordCreating, @hash1)
-        #Word.create(word:params[:word],meaning1:@hash1["meaning1"],meaning2:@hash1["meaning2"],meaning3:@hash1["meaning3"])
+        
+        Word.create(word:params[:word],meaning1:@hash1["meaning1"],meaning2:@hash1["meaning2"],meaning3:@hash1["meaning3"])
 	    end
 	  end  
   end
