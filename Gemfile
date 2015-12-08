@@ -3,8 +3,17 @@ source 'https://rubygems.org'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.3'
+
+ruby '2.2.3'
+gem "heroku"
 # Use mysql as the database for Active Record
-gem 'mysql2'
+group :development, :test do
+  gem 'mysql'
+end
+group :production do
+  gem 'pg'
+  gem 'thin'
+end
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
