@@ -54,7 +54,8 @@ class DictionaryController < ApplicationController
   def showbookmarked
   @words  =  Word.where(bookmarked: true)
   end 
-  def close 
+  def index
+  @ip_address = request.headers["REMOTE_ADDR"] 
   end
   def download 
       respond_to do |format|

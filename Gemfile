@@ -8,7 +8,7 @@ ruby '2.2.3'
 gem "heroku"
 # Use mysql as the database for Active Record
 group :development, :test do
-  gem 'mysql'
+  gem 'mysql2'
 end
 group :production do
   gem 'pg'

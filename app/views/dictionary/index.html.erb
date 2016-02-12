@@ -1,4 +1,5 @@
 <div class="container well" style="width:500px">
+<h1>your ip address : <%=@ip_address%></h1>
 <h1>Dictionary</h1>
 <%=link_to "show bookmaked words",showbookmarkedwords_path,remote: true,class: "btn btn-xs btn-success pull-right"%><br>
 <%= form_tag(dictionary_search_path, remote: true) do -%>

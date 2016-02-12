@@ -104,7 +104,7 @@ GEM
     minitest (5.8.0)
     mono_logger (1.1.0)
     multi_json (1.11.2)
-    mysql (2.9.1)
+    mysql2 (0.3.19)
     net-ssh (3.0.1)
     net-ssh-gateway (1.2.0)
       net-ssh (>= 2.6.5)
@@ -228,7 +228,7 @@ DEPENDENCIES
   jbuilder (~> 2.0)
   jquery-rails
   less-rails
-  mysql
+  mysql2
   pg
   prawn
   rails (= 4.2.3)
