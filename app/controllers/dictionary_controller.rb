@@ -55,7 +55,7 @@ class DictionaryController < ApplicationController
   @words  =  Word.where(bookmarked: true)
   end 
   def index
-  @ip_address = request.headers["REMOTE_HOST"] 
+  @ip_address = request.remote_ip
   end
   def download 
       respond_to do |format|
