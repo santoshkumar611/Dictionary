@@ -23,14 +23,25 @@ class DictionaryController < ApplicationController
         @suggestions = response["entry_list"]["suggestion"]
       else
         response = response["entry_list"]["entry"]
+        puts "---------"
+        puts response 
         if response.class == {}.class
-          response = response["def"]["dt"]
+          response = response["def"]
         elsif response.class == [].class
-          puts  response[0]["def"]
-          response = response[0]["def"]["dt"]
+          
+          response = response[0]["def"]
         end
-
+        puts "--------"
+        puts response 
         if response.class == {}.class
+          response = response["dt"]
+        elsif response.class == [].class
+          
+          response = response[0]["dt"]
+        end
+        puts "---------"
+        puts response 
+        if response.class != [].class
          @bookmarked = false
          @hash1["word"] = params[:word] 
          @hash1["meaning1"] = response.gsub(':','')
