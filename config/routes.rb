@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get  'dictionary/showbookmarked' => 'dictionary#showbookmarked',as: :showbookmarkedwords
   get  'dictionary/close' => 'dictionary#close',as: :close
   get  'dictionary/download/:word' => 'dictionary#download',as: :download
-
+  get  'dictionary/chill' => "dictionary#chill",as: :chill
 
 
 # Of course, you need to substitute your application name here, a block

@@ -74,6 +74,9 @@ GEM
     heroku-api (0.4.0)
       excon (~> 0.45)
       multi_json (~> 1.8)
+    httparty (0.13.5)
+      json (~> 1.8)
+      multi_xml (>= 0.5.2)
     i18n (0.7.0)
     jbuilder (2.3.1)
       activesupport (>= 3.0.0, < 5)
@@ -102,6 +105,7 @@ GEM
     minitest (5.8.0)
     mono_logger (1.1.0)
     multi_json (1.11.2)
+    multi_xml (0.5.5)
     mysql2 (0.3.19)
     net-ssh (3.0.1)
     net-ssh-gateway (1.2.0)
@@ -220,8 +224,10 @@ DEPENDENCIES
   coffee-rails (~> 4.1.0)
   font-awesome-rails
   heroku
+  httparty
   jbuilder (~> 2.0)
   jquery-rails
+  json
   less-rails
   mysql2
   pg
@@ -239,5 +245,8 @@ DEPENDENCIES
   unirest
   web-console (~> 2.0)
 
+RUBY VERSION
+   ruby 2.2.3p173
+
 BUNDLED WITH
-   1.10.6
+   1.12.5

@@ -1,5 +1,6 @@
 require 'unirest'
 require 'prawn'
+require 'json'
 class DictionaryController < ApplicationController
 	before_action :set_word ,only: [:search, :bookmarking, :unbookmarking, :showbookmarked, :close, :download]
 	def search
@@ -13,24 +14,22 @@ class DictionaryController < ApplicationController
 		else
       @hash1 = Hash.new
 		  word = params[:word]
-      response = Unirest.get "https://montanaflynn-dictionary.p.mashape.com/define?word="+word+"",
-      headers:{
-              "X-Mashape-Key" => "VQFQsSTNrdmshEL1WXruXZV6baBpp1SvlXkjsnF3u3ja2S1psj",
-              "Accept" => "application/json"
-            }
-      #raise response.body["definitions"][0]["text"]
-      
-      if response.body["definitions"].empty?
+      response = HTTParty.get "http://www.dictionaryapi.com/api/v1/references/sd4/xml/#{params[:word]}?key=9f88d753-f6de-4d2c-b2a0-f19862f3cc7f"
+      response = Hash.from_xml(response.parsed_response).to_json
+      response = JSON.parse(response)
+      puts response
+      response =  response["entry_list"]["entry"]["def"]["dt"]
+      if response.empty?
        flash[:notice] = "enter correct word"
       else
        @bookmarked = false
        @hash1["word"] = params[:word] 
-       @hash1["meaning1"] = response.body["definitions"][0]["text"]
-       if response.body["definitions"][1].present?
-        @hash1["meaning2"] = response.body["definitions"][1]["text"]
+       @hash1["meaning1"] = response[0]
+       if response[1].present?
+        @hash1["meaning2"] = response[1]
        end
-       if response.body["definitions"][2].present?
-        @hash1["meaning3"] = response.body["definitions"][2]["text"]
+       if response[2].present?
+        @hash1["meaning3"] = response[2]
 	     end
         
         Word.create(word:params[:word],meaning1:@hash1["meaning1"],meaning2:@hash1["meaning2"],meaning3:@hash1["meaning3"])
@@ -68,6 +67,11 @@ class DictionaryController < ApplicationController
         end
       end
   end
+  
+  def chill
+    render json: current_user_requests
+  end
+
   private 
   
   def set_word
