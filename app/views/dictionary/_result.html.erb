@@ -1,5 +1,12 @@
 <% if flash[:notice] %>
-    <div class="notice" style="color:red"><%= flash[:notice] %></div>
+	<% if @suggestions %>
+  	<div class="notice" style="color:green"><%= flash[:notice] %></div>
+  	<% @suggestions.each do |sug| %>
+			<h6> <%=sug%>  </h6>
+  	<%end%>
+  <% else %>
+  	<div class="notice" style="color:red"><%= flash[:notice] %></div>
+  <% end %>
 <% else %>
 <%= label_tag '',"Word : " %><br><%= @hash1["word"] %>
 <div class="res">

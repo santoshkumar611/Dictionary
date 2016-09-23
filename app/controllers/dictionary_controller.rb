@@ -18,22 +18,36 @@ class DictionaryController < ApplicationController
       response = Hash.from_xml(response.parsed_response).to_json
       response = JSON.parse(response)
       puts response
-      response =  response["entry_list"]["entry"]["def"]["dt"]
-      if response.empty?
-       flash[:notice] = "enter correct word"
+      if response["entry_list"]["suggestion"]
+        flash[:notice] = "some suggestions for you"
+        @suggestions = response["entry_list"]["suggestion"]
       else
-       @bookmarked = false
-       @hash1["word"] = params[:word] 
-       @hash1["meaning1"] = response[0]
-       if response[1].present?
-        @hash1["meaning2"] = response[1]
-       end
-       if response[2].present?
-        @hash1["meaning3"] = response[2]
-	     end
-        
-        Word.create(word:params[:word],meaning1:@hash1["meaning1"],meaning2:@hash1["meaning2"],meaning3:@hash1["meaning3"])
-	    end
+        response = response["entry_list"]["entry"]
+        if response.class == {}.class
+          response = response["def"]["dt"]
+        elsif response.class == [].class
+          puts  response[0]["def"]
+          response = response[0]["def"]["dt"]
+        end
+
+        if response.class == {}.class
+         @bookmarked = false
+         @hash1["word"] = params[:word] 
+         @hash1["meaning1"] = response.gsub(':','')
+         Word.create(word:params[:word],meaning1:@hash1["meaning1"])
+        else
+         @bookmarked = false
+         @hash1["word"] = params[:word] 
+         @hash1["meaning1"] = response[0].gsub(':','')
+         if response[1].present?
+          @hash1["meaning2"] = response[1].gsub(':','')
+         end
+         if response[2].present?
+          @hash1["meaning3"] = response[2].gsub(':','')
+  	     end
+          Word.create(word:params[:word],meaning1:@hash1["meaning1"],meaning2:@hash1["meaning2"],meaning3:@hash1["meaning3"])
+  	    end
+      end
 	  end  
   end
   def bookmarking
